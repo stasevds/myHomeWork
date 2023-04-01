@@ -33,7 +33,7 @@ alert(sum(1)(2)(3))*/
 
 //console.log(document.body.querySelectorAll('.test').children);
 
-const elements = document.body.querySelectorAll(".test");
+/*const elements = document.body.querySelectorAll(".test");
 const first = elements[0].dataset.property;
 elements.forEach((el,index, array)=>{
   console.log(el)
@@ -42,7 +42,23 @@ elements.forEach((el,index, array)=>{
     el.dataset.property= nextSibling.dataset.property
   }
   else {el.dataset.property = array[0].dataset.property
-}})
+}})*/
 
    
+//const firstDivElement = document.querySelector(".test");
+//firstDivElement.onclick = function(){
+  //console.log(this.dataset.property)
+//}
 
+const divElements = document.querySelectorAll(".test");
+divElements.forEach(el=> {
+  el.addEventListener('click', function(){
+    console.log(this.dataset.property)
+
+    el.removeEventListener('click',function(){
+      console.log(this.dataset.property)
+    })
+  },)
+  
+  
+})

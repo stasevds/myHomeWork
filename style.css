@@ -1,12 +1,9 @@
-body{
-  background: gray;  
-}    
+
 .test{
   padding: 10px;
   margin: 15px;
   background: green;
 }
-
-#parent {
-margin-top: 1000px;
+.transparent{
+  background: transparent ;
 }

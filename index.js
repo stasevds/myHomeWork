@@ -3,20 +3,18 @@
 
   function f(nextNumber){
     result += nextNumber;
-    //console.log(result);
+    console.log(result);
     return f;
   }
-  f.toString = function() {
-    console.log(result);
-    return result;
-  };
-  
+    
   return f;
 }
-console.log(sum(1)(2)(3));
-alert(sum(1)(2)(3))*/
+sum(1)(2)(3);
 
 
+//Пример Дз№1
+
+//Занятие №1
 
 //const testElement = document.querySelector('#test')
 //const testElement = document.getElementsByClassName('test');
@@ -44,49 +42,96 @@ elements.forEach((el,index, array)=>{
   else {el.dataset.property = array[0].dataset.property
 }})*/
 
-   
-//const firstDivElement = document.querySelector(".test");
-//firstDivElement.onclick = function(){
-  //console.log(this.dataset.property)
-//}
+//Занятие №2 
 
-/*const divElements = document.querySelectorAll(".test");
-divElements.forEach(el=> {
+//const firstDivElement = document.querySelector(".test");
+//console.log(firstDivElement);
+//firstDivElement.onclick = () => alert('Hello');
+/*firstDivElement.onclick = function(){
+  console.log('Hello');
+}
+firstDivElement.onclick = function(){
+  console.log(this.dataset.property)
+}*/
+
+//const divElements = document.querySelectorAll(".test");
+//console.log(divElements);
+/*for(i=0; i<divElements.length; i++){
+  divElements[i].onclick = function(){
+    console.log(this.dataset.property);
+  }
+}*/
+
+/*divElements.forEach(el => {
+  el.onclick = function(){
+    console.log(this.dataset.property)
+  }
+})
+
+
+divElements.forEach( el => {
   el.addEventListener('click', function(){
     console.log(this.dataset.property)
 
     el.removeEventListener('click',function(){
       console.log(this.dataset.property)
     })
-  },)
-  
-  
+  },{
+     once: true,    
+  })
+
 })
 
 const divElements = document.querySelectorAll(".test");
+
 const clickHandler = function(e){
- console.log (this);
- console.log (e)
+  console.log(this.dataset.property);
+
+  console.log (this);
+  console.log (e)
+  
+  //this.removeEventListener('click',clickHandler)
 }
 
 
 divElements.forEach(el=> {
   el.addEventListener('click',clickHandler)
-})
+});*/
 
-const root = document.querySelector('#parent');
+/*const root = document.querySelector('#parent');
+
+/*root.addEventListener('click', (e)=>{
+ // console.log(e.target.dataset.property);
+  //console.log(e.target);
+ //console.log(e.currentTarget);
+})
 
 root.addEventListener('click', (e)=>{
   const goalElement = e.target.closest('.test')
- //if(e.target !== e.currentTarget && e.target.tagName==='LI'){
- //console.log(e.target.dataset.property)
-  if(goalElement && goalElement.style.background==='transparent'){
+
+  //if(e.target !== e.currentTarget && e.target.tagName==='LI'){ 
+  
+  //if(e.target.tagName==='LI'){
+  //console.log(e.target.dataset.property)
+  
+  //if(goalElement){
+    //console.log(goalElement.dataset.property);
+  //}
+
+
+ if(goalElement && goalElement.style.background ==='transparent'){
     goalElement.style.background=''
-      //console.log(goalElement.dataset.property)
+      console.log(goalElement.dataset.property)
   } else if (goalElement){
     goalElement.style.background ='transparent'
     console.log('transparent')
   }
+
+if(goalElement){
+  goalElement.classList.toggle('transparent');
+  //goalElement.style.background = 'transparent';
+  console.log('transparent');
+}
 })*/
 
 const root = document.querySelector('#parent'); 
@@ -97,16 +142,22 @@ const cleanStyles = ()=> root.querySelectorAll ('li[style]')
 }) ;  
 
 
-root.addEventListener('click', (e)=>{
-  const goalElement = e.target.closest('.test')
- const randomColor ="#"+ Math.floor(Math.random()*);
+document.documentElement.addEventListener('click', (e)=>{
+  const goalElement = e.target.closest('.test');
+ const randomColor ="#"+ Math.floor(Math.random()*14642448).toString(16);
 
   if(goalElement){
     goalElement.style.background = randomColor;
       
   } else {
   cleanStyles()
-  }
+ //goalElement.style.background = '';
+  //console.log(e.currentTarget.querySelectorAll('li[style]')) 
+  /*e.currentTarget.querySelectorAll('li[style]')
+  .forEach(element => {
+    element.style.background = '';
+  });*/
+}
 })
 
 

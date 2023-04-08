@@ -1,37 +1,4 @@
-/*const data = [
-	{
-		type: "input",
-		id: "name",
-		value: "",
-		placeholder: "name",
-	},
-	{
-		type: "input",
-		id: "surname",
-		value: "",
-		placeholder: "surname",
-	},
-	{
-		type: "date",
-		id: "birthday",
-		value: "",
-		placeholder: "date of birth",
-	},
-	{
-		type: "toggle",
-		id: "sex",
-		value: "man",
-		options: ["man", "woman"],
-		placeholder: "sex",
-	},
-	{
-		type: "checkbox",
-		id: "time",
-		value: "",
-		options: ["9-10 AM", "11-102 AM", "1-2 PM", "3-4 PM", "5-6 PM"],
-		placeholder: "select timeslot for assessment",
-	},
-];*/
+
 
 // Перед вами массив данных, вы должны создать форму на странице а затем поместить в нее элементы созданные 
 //на основе этого массива данных,
@@ -43,7 +10,7 @@
 // и создать на их основе массив [{id: id, value: новое значение}] и просто вывести его
 
 
-  document.body.insertAdjacentHTML("afterbegin", `<form id="form">
+ /* document.body.insertAdjacentHTML("afterbegin", `<form id="form">
     <label for="name">Name:</label>
     <input type="text" value=" " placeholder="name" id="name"><br><br>
     <label for="surname">Surname:</label>
@@ -90,4 +57,142 @@
     arr.push(state);
     arr.push(time);
     console.log(arr);
-  }
+  }*/
+
+  const data = [
+    {
+        type: "input",
+        id: "name",
+        value: "",
+        placeholder: "name",
+    },
+    {
+        type: "input",
+        id: "surname",
+        value: "",
+        placeholder: "surname",
+    },
+    {
+        type: "date",
+        id: "birthday",
+        value: "",
+        placeholder: "date of birth",
+    },
+    {
+        type: "radio",
+        id: "sex",
+        value: "man",
+        options: ["man", "woman"],
+        placeholder: "sex",
+    },
+    {
+        type: "checkbox",
+        id: "time",
+        value: "",
+        options: ["9-10 AM", "11-12 AM", "1-2 PM", "3-4 PM", "5-6 PM"],
+        placeholder: "select timeslot for assessment",
+    },
+];
+
+let createForm = function () {
+    let container = document.querySelector('#container');
+    let form = document.createElement('form');
+    form.id = 'form';
+    container.append(form);
+};
+
+let addForm = function () {
+
+
+    data.map(function (element) {
+
+        let br = document.createElement('br');
+
+        if ((element['type']) === 'input') {
+            let input = document.createElement('input');
+            let label = document.createElement('label');
+
+            input.type = element[`type`];
+            input.id = element['id'];
+            input.value = element['value'];
+
+            label.textContent = element['placeholder'];
+            label.setAttribute('for', `${element['id']}`);
+
+            form.append(input);
+            form.append(label);
+            form.append(br);
+
+        } else if ((element['type']) === 'date') {
+
+            let input = document.createElement('input');
+            let label = document.createElement('label');
+
+            input.type = element[`type`];
+            input.id = element['id'];
+            input.value = element['value'];
+
+            label.textContent = element['placeholder'];
+            label.setAttribute('for', `${element['id']}`);
+
+            form.append(input);
+            form.append(label);
+            form.append(br);
+
+        } else if ((element['type']) === 'radio') {
+
+            let input = document.createElement('input');
+
+            input.type = 'radio'
+            input.value = element['value']
+
+            element['options'].map(function (index) {
+
+                let input = document.createElement('input');
+                let label = document.createElement('label');
+
+                input.name = element['id'];
+                input.type = element['type'];
+
+                label.id = element['options'][index];
+                label.textContent = element['options'][index];
+
+                form.append(input);
+                form.append(label);
+            })
+
+            form.append(br);
+
+        } else if ((element['type']) === 'checkbox') {
+
+            let input = document.createElement('input');
+            let label = document.createElement('label');
+
+            input.type = element[`type`];
+            input.id = element['id'];
+            input.value = element['value'];
+
+            label.setAttribute('for', `${element['id']}`);
+            label.textContent = element['placeholder'];
+
+            element['options'].map(function (item, index) {
+
+                let input = document.createElement('input');
+                let label = document.createElement('label');
+
+                input.type = element[`type`];
+                input.id = element['id'];
+                input.value = element['value'];
+
+                label.textContent = element['options'][index];
+
+                form.append(input);
+                form.append(label);
+            });
+        }
+
+        form.append(br)
+
+    });
+};
+

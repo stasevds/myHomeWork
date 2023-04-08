@@ -118,7 +118,7 @@ setTimeout(()=>{
   }
   ++count;
   console.log('tick');
- },1000)  */
+ },1000) 
  
 //setTimeout(console.log, 1000, 1)
 
@@ -132,4 +132,136 @@ const id = setTimeout(function request(){
     setTimeout(request,timeout)
   }
   else clearTimeout(id)
-}, timeout)
+}, timeout) 
+
+// КУСОЧЕК ДОМАШНЕЙ РАБОТЫ
+
+const array = [
+  {
+    id:"age",
+    type:'checkbox',
+    value: 1,
+    options: [1,2,3,4]
+  }
+]
+
+const form = document.querySelector('#form');
+array.forEach(el=>{
+  if(Array.isArray(el.options)){
+    el.options.forEach(options=>{
+      const checkboxElement = document.createElement("input");
+      checkboxElement.type = 'checkbox';
+      checkboxElement.id = 'options';
+      checkboxElement.name = el.id;
+      checkboxElement.value = 'options';
+      form.append(checkboxElement) 
+    })
+  }
+})
+// КОНЕЦ
+
+setTimeout(()=> console.log(2), 100)
+
+console.time('test')
+for(let i = 0; i<1000000; i++){
+  const div = document.createElement('div');
+  document.body.append(div);
+
+}
+console.timeEnd('test')*/
+
+//ПРИМЕР
+ 
+/*const div = document.querySelector('#div');
+
+div.addEventListener("mouseover", (e)=>{
+
+  const width = e.target.offsetWidth;
+
+  e.target.style.width= `${e.target.offsetWidth}px`
+  
+  const id = setInterval(()=>{
+    
+    if(width>50){
+      console.log(e.target.style)
+    e.target.style.width = `${parseInt(width)}px`
+  } else clearInterval(id)
+  },100)
+  console.log(width)
+})*/
+
+//ПРИМЕР С ОПРЕДЕЛЕНИЕМ ОШИБКИ
+
+/*const user = {
+  name: 'Alex',
+  age: 29,
+}
+const data = [];
+
+
+  try{
+    if(!data.length) throw new Error ('empty data')
+    data.forEach(element => {
+      console.log(element)
+    });
+  } catch(e){
+    if(e.massage ==="empty data")console.log(e)
+    else throw e
+    //form.innerText
+  }
+  
+}
+
+
+//const data =[];
+//data.forEach(element => {
+  //console.log(element)
+//})
+
+//user.forEach(element => {
+  //console.log(element)
+//})*/
+
+/*class MyError extends Error{
+  constructor(message){
+    super(message)
+    this.name = 'MyError'
+  }
+}
+
+throw new MyError('my error')
+try{
+
+} catch(e){
+if(e.name === 'MyError')
+else
+}*/
+
+//ЗАДАЧКИ
+//1. нет длинны массива;
+//2. вместо массива undefined;
+//3. нет элемента формы на странице;
+
+const noDataErrorMassage= 'invalid data'
+const emptyDataErrorMassage= 'empty data'
+const noformElementMassage= 'form element does exist'
+
+try{ 
+  const data =[];
+  const form = document.querySelector('#form');
+  let formElements;
+  try{
+    try{
+     if(!data.length) throw new Error(emptyDataErrorMassage) 
+     formElements = data.map((el)=> el)
+    } catch(e){
+     if(e.massage === emptyDataErrorMassage) console.log(e)
+     else throw e
+    }
+  } catch(e){  
+    if(form) form.append(...formElements)
+    else throw new Error (noformElementMassage)
+  }   
+} catch (e){
+if(e.massage ===noformElementMassage) console.log(e)
+}

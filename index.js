@@ -79,7 +79,7 @@
         placeholder: "date of birth",
     },
     {
-        type: "radio",
+        type: "toggle",
         id: "sex",
         value: "man",
         options: ["man", "woman"],
@@ -94,105 +94,155 @@
     },
 ];
 
-let createForm = function () {
-    let container = document.querySelector('#container');
-    let form = document.createElement('form');
-    form.id = 'form';
-    container.append(form);
-};
+const form = document.createElement('form');
+form.id = "form";
+document.body.append(form);
 
-let addForm = function () {
+data.forEach(el=>{
+    if(el.type ==="input"){
+        const label = document.createElement('label');
+        const inputElement = document.createElement('input');
+        const br = document.createElement('br');
 
+        inputElement.placeholder = el.placeholder;
+        inputElement.id = el.id;
+        inputElement.value = el.value;
 
-    data.map(function (element) {
+        label.setAttribute('for', el.id)
+		label.innerText = el.id
 
-        let br = document.createElement('br');
-
-        if ((element['type']) === 'input') {
-            let input = document.createElement('input');
-            let label = document.createElement('label');
-
-            input.type = element[`type`];
-            input.id = element['id'];
-            input.value = element['value'];
-
-            label.textContent = element['placeholder'];
-            label.setAttribute('for', `${element['id']}`);
-
-            form.append(input);
-            form.append(label);
-            form.append(br);
-
-        } else if ((element['type']) === 'date') {
-
-            let input = document.createElement('input');
-            let label = document.createElement('label');
-
-            input.type = element[`type`];
-            input.id = element['id'];
-            input.value = element['value'];
-
-            label.textContent = element['placeholder'];
-            label.setAttribute('for', `${element['id']}`);
-
-            form.append(input);
-            form.append(label);
-            form.append(br);
-
-        } else if ((element['type']) === 'radio') {
-
-            let input = document.createElement('input');
-
-            input.type = 'radio'
-            input.value = element['value']
-
-            element['options'].map(function (index) {
-
-                let input = document.createElement('input');
-                let label = document.createElement('label');
-
-                input.name = element['id'];
-                input.type = element['type'];
-
-                label.id = element['options'][index];
-                label.textContent = element['options'][index];
-
-                form.append(input);
-                form.append(label);
-            })
-
-            form.append(br);
-
-        } else if ((element['type']) === 'checkbox') {
-
-            let input = document.createElement('input');
-            let label = document.createElement('label');
-
-            input.type = element[`type`];
-            input.id = element['id'];
-            input.value = element['value'];
-
-            label.setAttribute('for', `${element['id']}`);
-            label.textContent = element['placeholder'];
-
-            element['options'].map(function (item, index) {
-
-                let input = document.createElement('input');
-                let label = document.createElement('label');
-
-                input.type = element[`type`];
-                input.id = element['id'];
-                input.value = element['value'];
-
-                label.textContent = element['options'][index];
-
-                form.append(input);
-                form.append(label);
-            });
-        }
-
+		form.append(label);
+		form.append(inputElement);
         form.append(br)
+    }
+    if(el.type ==="date"){
+        const label = document.createElement('label');
+        const inputElement = document.createElement('input');
+        const br = document.createElement('br');
 
-    });
+        inputElement.type = el.type;
+        inputElement.placeholder = el.placeholder;
+        inputElement.id = el.id;
+        inputElement.value = el.value;
+        
+        label.setAttribute('for', el.id)
+		label.innerText = el.id
+
+		form.append(label);
+		form.append(inputElement);
+        form.append(br)
+    }
+    if(el.type === 'toggle'){
+        el.options.forEach(option=>{
+           const label = document.createElement('label');
+           const title = document.createElement('span');
+           const checkboxElement = document.createElement('input');
+           
+           checkboxElement.type = 'radio';
+           checkboxElement.id = option;
+           checkboxElement.name = el.id;
+           checkboxElement.value = option;
+           
+           title.innerText = option;
+   
+           label.append(title)
+           label.append(checkboxElement)
+           form.append(label)
+         })
+     const br = document.createElement('br');    
+     form.append(br)
+    }
+    if(el.type === 'checkbox'){
+        el.options.forEach(option=>{
+           const label = document.createElement('label');
+           const title = document.createElement('span');
+           const checkboxElement = document.createElement('input');
+           
+           checkboxElement.type = 'checkbox';
+           checkboxElement.id = el.id;
+           checkboxElement.name = option;
+           checkboxElement.value = option;
+           
+           title.innerText = option;
+   
+           label.append(title)
+           label.append(checkboxElement)
+           form.append(label)
+         })
+     const br = document.createElement('br');    
+     form.append(br)
+    }
+})
+
+const button = document.createElement('button');
+button.type = 'submit';
+button.innerText = 'submit';
+
+form.append(button);
+
+const inputElementsArray = document.getElementsByTagName('input')
+
+form.onsubmit =(event) => {
+	event.preventDefault();
 };
+
+button.addEventListener("click", () => {
+	const array = []
+	data.forEach((elem) => {
+		const obj = {};
+		if (elem.id === "name") {
+
+			obj.id = elem.id;
+			obj.value = inputElementsArray[0].value
+
+			array.push(obj)
+		}
+		if (elem.id === "surname") {
+
+			obj.id = elem.id;
+			obj.value = inputElementsArray[1].value
+
+			array.push(obj)
+		}
+		if (elem.id === "birthday") {
+
+			obj.id = elem.id;
+			obj.value = inputElementsArray[2].value
+
+			array.push(obj)
+		}
+		if (elem.id === "sex") {
+
+			const radioButton = document.getElementsByName('sex')
+
+			obj.id = elem.id;
+
+			radioButton.forEach((elem) => {
+
+				if (elem.checked === true) {
+					obj.value = elem.value
+				}
+
+			})
+
+			array.push(obj)
+		}
+		if (elem.id === "time") {
+			const checkbox = document.querySelectorAll('[type="checkbox"]');
+
+			obj.id = elem.id;
+
+			checkbox.forEach((elem) => {
+
+				if (elem.checked === true) {
+					obj.value = elem.name;
+				}
+
+			});
+
+			array.push(obj);
+		}
+	})
+	console.log(array);
+})
 

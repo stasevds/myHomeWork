@@ -244,7 +244,7 @@ else
 
 const noDataErrorMassage= 'invalid data'
 const emptyDataErrorMassage= 'empty data'
-const noformElementMassage= 'form element does exist'
+const noFormElementMassage= 'form element does exist'
 
 try{ 
   const data =[];
@@ -260,8 +260,8 @@ try{
     }
   } catch(e){  
     if(form) form.append(...formElements)
-    else throw new Error (noformElementMassage)
+    else throw new Error (noFormElementMassage)
   }   
 } catch (e){
-if(e.massage ===noformElementMassage) console.log(e)
+if(e.massage ===noFormElementMassage) console.log(e)
 }

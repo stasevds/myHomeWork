@@ -1,18 +1,4 @@
-/*const list = document.getElementById('list');
-function addToDo(toDo){
- const text = `<li class = "item">
-                 <i class = "add" job="complete"></i>
-                 <p class= "text">${toDo}</p>
-                 <i class = "close" job="delete"></i>  
-              </li>`
-  
-  const position = "beforeend"            
-  list.insertAdjacentHTML(position, text);
-}
-
-addToDo('drink beer');
-addToDo('eat salad');*/
-
+/*
 const array =[1,2,3,4,5];
 const template = document.querySelector('#template');
 const container = document.createElement('ul');
@@ -23,4 +9,27 @@ array.forEach(el=>{
   container.append(element)
 })
 
-document.body.append(container);
+document.body.append(container);*/
+
+const makeRequestNew = (method, url) => fetch(url,{
+  method
+})
+
+const template = document.querySelector('#template');
+const ulToDo = document.createElement('ul');
+
+makeRequestNew('GET','https://jsonplaceholder.typicode.com/todos/')
+.then(data =>{
+  return data.json()
+})
+.then(data => {
+  data.forEach(el => {
+    const element = template.content.cloneNode(true);
+    element.querySelector('#span').textContent = el.title;
+    ulToDo.append(element)
+  });
+
+  document.body.append(ulToDo); 
+    
+})
+

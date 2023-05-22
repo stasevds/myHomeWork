@@ -1,39 +1,49 @@
-//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const PATHS = require('./paths.js');
+require('dotenv').config();
 
-module.exports = {
-   mode: 'development',   
-   entry:'/src/index.js',
+
+
+module.exports = { 
+   entry:path.join(PATHS.SRC,'index.js'),
    output:{
-     filename: "bundle.js",
-     path:'/dist'
+     filename: "[name][hash].js",
+     path: path.resolve(PATHS.DIST)
    },
-   devServer:{
-      static:{
-         directory: path.join(__dirname, 'public'),
-      },
-      compress: true,
-      port: 9000,
-      hot: true, 
-   },
+   
    watchOptions:{
       aggregateTimeout:100,
       ignored:['node_modules/**'],
    },
    resolve:{
-    extensions: ['.js']
+      extensions: ['.js'],
+      alias: {
+         assets: path.resolve(PATHS.ASSETS),
+         src: path.resolve(PATHS.SRC)
+      }
    },
    module:{
       rules:[
          {
+            test: /.scss$/i,
+            use: [
+               "style-loader",
+               {
+                  loader: 'css-loader',
+                  options:{sourceMap: true},
+               },
+              "sass-loader"
+            ]    
+         },
+         {
             test:/\.css$/i,
             use: [
                "style-loader",
-               //MiniCssExtractPlugin.loader,
-               "css-loader"
+               "css-loader",
             ], 
-         },
+         }, 
          {
             test:/\.(png|jpe?g|gif)$/i,
             use:[
@@ -45,11 +55,12 @@ module.exports = {
       ]
    },
    plugins: [
-
+      new MiniCssExtractPlugin({
+         filename: '[name].[hash].css'
+      }),    
       new HtmlWebpackPlugin({
        filename: "index.html",
-       // favicon: "/public/favicon.ico" 
-       template: path.join(__dirname, '/public/index.html'), 
+       template: path.join(PATHS.PUBLIC, 'index.html'), 
       })
    ]
 }

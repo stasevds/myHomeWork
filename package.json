@@ -3,19 +3,26 @@
     "is-odd": "^3.0.1"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.4",
+    "dotenv": "^16.0.3",
     "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.3.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack-dev-server": "^4.15.0",
+    "webpack-merge": "^5.9.0"
   },
   "name": "myhomework",
   "version": "1.0.0",
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.config.js"
+    "start": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.build.js"
   },
   "repository": {
     "type": "git",

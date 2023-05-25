@@ -1,3 +1,5 @@
-import './style.scss';
-import { asyncFunk } from './async';
-asyncFunk()
+import { asyncFunk } from "./async";
+import "./style.scss";
+
+asyncFunk();
+document.querySelector("#id");

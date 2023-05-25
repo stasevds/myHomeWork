@@ -10,8 +10,13 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.4",
     "dotenv": "^16.0.3",
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.6",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",
     "style-loader": "^3.3.3",
@@ -26,7 +31,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.build.js"
+    "build": "webpack --config webpack.config.build.js",
+    "lint": "eslint --fix --ext .js ."
   },
   "repository": {
     "type": "git",
